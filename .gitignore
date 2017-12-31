@@ -1,5 +1,5 @@
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+.idea/*
+config.yml
+resources
+!resources/config.yml
+!resources/**.ini

@@ -4,21 +4,12 @@ namespace xenialdan\fireworks\entity;
 
 use pocketmine\entity\Entity;
 use pocketmine\entity\projectile\Projectile;
-use pocketmine\item\Item as ItemItem;
 use pocketmine\level\Level;
-use pocketmine\level\particle\ItemBreakParticle;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\nbt\tag\DoubleTag;
-use pocketmine\nbt\tag\FloatTag;
-use pocketmine\nbt\tag\IntTag;
-use pocketmine\nbt\tag\ListTag;
-use pocketmine\nbt\tag\ShortTag;
-use pocketmine\network\mcpe\protocol\AddEntityPacket;
 use pocketmine\network\mcpe\protocol\EntityEventPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\Player;
 use pocketmine\utils\Random;
-use xenialdan\fireworks\FakeSetEntityDataPacket;
 use xenialdan\fireworks\item\Fireworks;
 
 class FireworksRocket extends Projectile{
@@ -52,8 +43,9 @@ class FireworksRocket extends Projectile{
 		$flyTime = 1;
 
 		try{
-			if($this->namedtag->getCompoundTag("Fireworks")->getByte("Flight", 1))
-			$flyTime = $this->namedtag->getCompoundTag("Fireworks")->getByte("Flight", 1);
+			if (!is_null($this->namedtag->getCompoundTag("Fireworks")))
+				if ($this->namedtag->getCompoundTag("Fireworks")->getByte("Flight", 1))
+					$flyTime = $this->namedtag->getCompoundTag("Fireworks")->getByte("Flight", 1);
 		} catch (\Exception $exception){
 			$this->server->getLogger()->debug($exception);
 		}
@@ -67,7 +59,7 @@ class FireworksRocket extends Projectile{
 		parent::spawnTo($player);
 	}
 
-	public function despawnFrom(Player $player, bool $send = true){
+	/*public function despawnFrom(Player $player, bool $send = true){
 		$entityEvent = new EntityEventPacket();
 		$entityEvent->entityRuntimeId = $this->id;
 		$entityEvent->event = EntityEventPacket::FIREWORK_PARTICLES;
@@ -77,14 +69,26 @@ class FireworksRocket extends Projectile{
 		parent::despawnFrom($player, $send);
 
 		$this->level->broadcastLevelSoundEvent($this, LevelSoundEventPacket::SOUND_BLAST);
+	}*/
+
+	public function despawnFromAll(){
+		$entityEvent = new EntityEventPacket();
+		$entityEvent->entityRuntimeId = $this->id;
+		$entityEvent->event = EntityEventPacket::FIREWORK_PARTICLES;
+		$entityEvent->data = 0;
+		$this->getLevel()->getServer()->broadcastPacket($this->level->getPlayers(), $entityEvent);
+
+		parent::despawnFromAll();
+
+		$this->level->broadcastLevelSoundEvent($this, LevelSoundEventPacket::SOUND_BLAST);
 	}
 
 	public function entityBaseTick(int $tickDiff = 1): bool{
-		if($this->lifeTime-- < 0){
+		if ($this->lifeTime-- < 0){
 			$this->flagForDespawn();
 			return true;
-		} else {
+		} else{
 			return parent::entityBaseTick($tickDiff);
 		}
-}
+	}
 }

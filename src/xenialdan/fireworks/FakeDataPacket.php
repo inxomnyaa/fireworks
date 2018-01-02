@@ -39,7 +39,7 @@ abstract class FakeDataPacket extends DataPacket{
 	 *
 	 * @return bool true if the packet was handled successfully, false if not.
 	 */
-	abstract public function handle(NetworkSession $session) : bool;
+	abstract public function handle(NetworkSession $session): bool;
 
 
 	/**
@@ -49,14 +49,14 @@ abstract class FakeDataPacket extends DataPacket{
 	 *
 	 * @return array
 	 */
-	public function getEntityMetadata(bool $types = true) : array{
+	public function getEntityMetadata(bool $types = true): array{
 		$count = $this->getUnsignedVarInt();
 		$data = [];
-		for($i = 0; $i < $count; ++$i){
+		for ($i = 0; $i < $count; ++$i){
 			$key = $this->getUnsignedVarInt();
 			$type = $this->getUnsignedVarInt();
 			$value = null;
-			switch($type){
+			switch ($type){
 				case Entity::DATA_TYPE_BYTE:
 					$value = $this->getByte();
 					break;
@@ -95,9 +95,9 @@ abstract class FakeDataPacket extends DataPacket{
 				default:
 					$value = [];
 			}
-			if($types === true){
+			if ($types === true){
 				$data[$key] = [$type, $value];
-			}else{
+			} else{
 				$data[$key] = $value;
 			}
 		}
@@ -112,10 +112,10 @@ abstract class FakeDataPacket extends DataPacket{
 	 */
 	public function putEntityMetadata(array $metadata){
 		$this->putUnsignedVarInt(count($metadata));
-		foreach($metadata as $key => $d){
+		foreach ($metadata as $key => $d){
 			$this->putUnsignedVarInt($key); //data key
 			$this->putUnsignedVarInt($d[0]); //data type
-			switch($d[0]){
+			switch ($d[0]){
 				case Entity::DATA_TYPE_BYTE:
 					$this->putByte($d[1]);
 					break;
@@ -133,7 +133,7 @@ abstract class FakeDataPacket extends DataPacket{
 					break;
 				case Entity::DATA_TYPE_SLOT:
 					//TODO: change this implementation (use objects)
-					$this->putSlot(ItemFactory::get($d[1][0], $d[1][2], $d[1][1], $d[1][3]??"")); //ID, damage, count, nbt
+					$this->putSlot(ItemFactory::get($d[1][0], $d[1][2], $d[1][1], $d[1][3] ?? "")); //ID, damage, count, nbt
 					break;
 				case Entity::DATA_TYPE_POS:
 					//TODO: change this implementation (use objects)

@@ -28,8 +28,8 @@ class Loader extends PluginBase implements Listener{
 	public function onJoin(PlayerJoinEvent $event){
 
 		$explosion = new FireworksExplosion();
-		$explosion->fireworkColor = [4,4,4];
-		$explosion->fireworkFade = [5,5,5];
+		$explosion->fireworkColor = [4, 4, 4];
+		$explosion->fireworkFade = [5, 5, 5];
 		$explosion->fireworkFlicker = true;
 		$explosion->fireworkTrail = false;
 		$explosion->fireworkType = 4;

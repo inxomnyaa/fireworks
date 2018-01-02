@@ -47,7 +47,7 @@ class FakeSetEntityDataPacket extends FakeDataPacket{
 		$this->putEntityMetadata($this->metadata);
 	}
 
-	public function handle(NetworkSession $session) : bool{
+	public function handle(NetworkSession $session): bool{
 		return $session->handleSetEntityData($this);
 	}
 }

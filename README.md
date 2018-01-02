@@ -11,7 +11,7 @@ You can launch any firework from the creative inventory AND custom ones - just l
 Either, give a firework via gamemode 1, or /give command.
 For generating the /give command i suggest using: https://mcstacker.bimbimma.com/mcstacker1.10.php and modifying the command to work with PocketMine-MP. This is not easy. No need to explain further.
 
-The easier way is to use the code to create custom fireworks. See #Create-a-custom-firework for that.
+The easier way is to use the code to create custom fireworks. See [Create a custom firework](#create-a-custom-firework) for that.
 
 # Create a custom firework
 This is sample code to explain the "API"-alike part of the plugin, giving 2 custom fireworks:

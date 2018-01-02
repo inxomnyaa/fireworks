@@ -1,6 +1,7 @@
-[![](https://poggit.pmmp.io/shield.state/fireworks)](https://poggit.pmmp.io/p/fireworks)
-<a href="https://poggit.pmmp.io/p/fireworks"><img src="https://poggit.pmmp.io/shield.state/fireworks"></a>
-# fireworks
+![plugin icon](https://github.com/thebigsmileXD/fireworks/blob/master/resources/fireworks_icon.png)
+
+# fireworks [![](https://poggit.pmmp.io/shield.state/fireworks)](https://poggit.pmmp.io/p/fireworks)
+
 Adds Fireworks to Pocketmine
 Its simply adding firework items and entities into PocketMine-MP servers.
 

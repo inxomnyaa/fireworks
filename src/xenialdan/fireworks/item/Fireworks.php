@@ -25,7 +25,7 @@ class Fireworks extends Item{
 		parent::__construct(self::FIREWORKS, $meta, "Fireworks");
 	}
 
-	public function onActivate(Level $level, Player $player, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector): bool{
+	public function onActivate(Player $player, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector): bool{
 		$random = new Random();
 		$yaw = $random->nextBoundedInt(360);
 		$pitch = -1 * (float)(90 + ($random->nextFloat() * $this->spread - $this->spread / 2));
@@ -36,8 +36,8 @@ class Fireworks extends Item{
 			$nbt->setTag($tags);
 		}
 
-		$rocket = new FireworksRocket($level, $nbt, $player, $this, $random);
-		$level->addEntity($rocket);
+		$rocket = new FireworksRocket($player->getLevel(), $nbt, $player, $this, $random);
+		$player->getLevel()->addEntity($rocket);
 
 		if ($rocket instanceof Entity){
 			if ($player->isSurvival()){

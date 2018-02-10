@@ -3,6 +3,6 @@ name: fireworks
 main: xenialdan\fireworks\Loader
 version: 1.0.2
 api:
-- 3.0.0-ALPHA10
+- 3.0.0-ALPHA11
 author: XenialDan
 ...

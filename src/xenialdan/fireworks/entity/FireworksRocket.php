@@ -6,7 +6,7 @@ use pocketmine\entity\Entity;
 use pocketmine\entity\projectile\Projectile;
 use pocketmine\level\Level;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\network\mcpe\protocol\EntityEventPacket;
+use pocketmine\network\mcpe\protocol\ActorEventPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\Player;
 use pocketmine\utils\Random;
@@ -63,7 +63,7 @@ class FireworksRocket extends Projectile{
 
     public function despawnFromAll(): void
     {
-		$this->broadcastEntityEvent(EntityEventPacket::FIREWORK_PARTICLES, 0);
+        $this->broadcastEntityEvent(ActorEventPacket::FIREWORK_PARTICLES, 0);
 
 		parent::despawnFromAll();
 

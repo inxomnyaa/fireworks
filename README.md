@@ -1,3 +1,6 @@
+# Deprecated
+Check out https://github.com/BlockHorizons/Fireworks/ for an up to date firework plugin, including a simple API!
+
 ![plugin icon](https://github.com/thebigsmileXD/fireworks/blob/master/resources/fireworks_icon.png)
 
 # fireworks [![](https://poggit.pmmp.io/shield.state/fireworks)](https://poggit.pmmp.io/p/fireworks)
